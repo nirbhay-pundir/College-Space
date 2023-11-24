@@ -1,7 +1,7 @@
 name: college_space
 description: An application for college students where they can get there notes, timetable, etc. related their courses which helps them in their studies.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -9,6 +9,12 @@ environment:
 dependencies:
   auto_size_text: ^3.0.0
   device_preview: ^1.1.0
+  firebase_analytics: ^10.7.1
+  firebase_auth: ^4.14.1
+  firebase_core: ^2.23.0
+  firebase_database: ^10.3.5
+  firebase_remote_config: ^4.3.5
+  firebase_storage: ^11.5.2
   flutter:
     sdk: flutter
   get: ^4.6.6

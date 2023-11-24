@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 
-class QTextStyles {
-  QTextStyles._();
+class CSTextStyles {
+  CSTextStyles._();
 
   static final ColorScheme colorScheme = AppTheme.theme.colorScheme;
 
@@ -25,6 +25,6 @@ class QTextStyles {
     color: colorScheme.primary,
     fontSize: 40,
     fontFamily: 'Blinker',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
   );
 }

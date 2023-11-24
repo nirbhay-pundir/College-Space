@@ -3,12 +3,17 @@ import 'package:college_space/src/constants/strings.dart';
 import 'package:college_space/src/constants/text_styles.dart';
 import 'package:college_space/src/controller/check_update_controller.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
+import 'package:college_space/src/screens/dashboard.dart';
+import 'package:college_space/src/screens/sign_in.dart';
+import 'package:college_space/src/screens/sign_up_personal.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
+import '../common_widgets/cs_button.dart';
+import '../common_widgets/cs_register_signup_text.dart';
 import '../utils/auto_size.dart';
 
 class CheckUpdate extends StatelessWidget {
@@ -19,19 +24,27 @@ class CheckUpdate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
-    checkUpdateController.startAnimation();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    checkUpdateController.startAnimation(context);
     AutoSize().init(context, 390, 844, 0);
-    return SafeArea(
-
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Obx(
-                  () =>
-                  AnimatedPositioned(
+    StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+    builder: (context, snapshot) {
+    if (snapshot.hasData) {
+    return Dashboard();
+    } else {
+    return StreamBuilder<User?>(
+    stream: FirebaseAuth.instance.authStateChanges(),
+    builder: (context, snapshot) {
+    if (snapshot.hasData) {
+    return Dashboard();
+    } else {
+        return SafeArea(
+          child: Scaffold(
+            body: Stack(
+              children: [
+                Obx(
+                  () => AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
                     curve: Curves.easeOutBack,
                     left: checkUpdateController.animating.value
@@ -52,19 +65,18 @@ class CheckUpdate extends StatelessWidget {
                       ),
                     ),
                   ),
-            ),
-            Obx(
-                  () =>
-                  Column(
+                ),
+                Obx(
+                  () => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
                         height: AutoSize.getAutoHeight(321),
                       ),
                       Hero(
-                        tag: 'QImage',
+                        tag: 'CSImage',
                         child: Image.asset(
-                          QImagePaths.updateCheckQImage,
+                          CSImagePaths.updateCheckCSImage,
                           height: AutoSize.getAutoHeight(204),
                           width: AutoSize.getAutoWidth(202),
                           fit: BoxFit.contain,
@@ -77,22 +89,21 @@ class CheckUpdate extends StatelessWidget {
                         SizedBox(
                           height: AutoSize.getAutoHeight(45),
                         )
-                      else
-                        if (checkUpdateController.animated.value)
-                          Center(
-                            child: SizedBox(
-                              width: AutoSize.getAutoHeight(45),
-                              height: AutoSize.getAutoHeight(45),
-                              child: CircularProgressIndicator(
-                                strokeWidth: AutoSize.getAutoHeight(4),
-                                color: colorScheme.secondary,
-                              ),
-                            ),
-                          )
-                        else
-                          SizedBox(
+                      else if (checkUpdateController.animated.value)
+                        Center(
+                          child: SizedBox(
+                            width: AutoSize.getAutoHeight(45),
                             height: AutoSize.getAutoHeight(45),
+                            child: CircularProgressIndicator(
+                              strokeWidth: AutoSize.getAutoHeight(4),
+                              color: colorScheme.secondary,
+                            ),
                           ),
+                        )
+                      else
+                        SizedBox(
+                          height: AutoSize.getAutoHeight(45),
+                        ),
                       SizedBox(
                         height: AutoSize.getAutoHeight(20),
                       ),
@@ -106,29 +117,14 @@ class CheckUpdate extends StatelessWidget {
                             minHeight: AutoSize.getAutoHeight(30),
                             maxHeight: AutoSize.getAutoHeight(30),
                           ),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: AutoSizeText.rich(
-                              minFontSize: 2,
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: QStrings.newUser0,
-                                    style: QTextStyles.bottomLine,
-                                  ),
-                                  TextSpan(
-                                    text: QStrings.newUser1,
-                                    recognizer: TapGestureRecognizer()
-                                    // TODO: Implement navigation to Signup screen
-                                      ..onTap = () {},
-                                    style: QTextStyles.bottomLine.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: colorScheme.background,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          child: CsRegisterSignUpText(
+                            colorScheme: colorScheme,
+                            color: colorScheme.background,
+                            onTap: () => {
+                              Navigator.pushNamed(context, SignUpPersonal.route)
+                            },
+                            text1: CSStrings.newUser0,
+                            text2: CSStrings.newUser1,
                           ),
                         ),
                         secondChild: Center(
@@ -136,9 +132,9 @@ class CheckUpdate extends StatelessWidget {
                             height: AutoSize.getAutoHeight(30),
                             child: AutoSizeText(
                               minFontSize: 2,
-                              QStrings.checkUpdate,
+                              CSStrings.checkUpdate,
                               textAlign: TextAlign.center,
-                              style: QTextStyles.bottomLine,
+                              style: CSTextStyles.bottomLine,
                             ),
                           ),
                         ),
@@ -148,58 +144,37 @@ class CheckUpdate extends StatelessWidget {
                       ),
                     ],
                   ),
-            ),
-            Obx(
-                  () =>
-                  AnimatedPositioned(
+                ),
+                Obx(
+                  () => AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
                     curve: Curves.easeOutBack,
                     left: checkUpdateController.updated.value
                         ? AutoSize.getAutoWidth(81)
                         : AutoSize.getAutoWidth(-511.51),
                     top: AutoSize.getAutoHeight(625),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minWidth: AutoSize.getAutoWidth(228),
-                          minHeight: AutoSize.getAutoHeight(45),
-                          maxWidth: AutoSize.getAutoWidth(228),
-                          maxHeight: AutoSize.getAutoHeight(45),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: checkUpdateController.isLoading.value
-                              ? null
-                              : () {
-                            checkUpdateController.setLoading(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: colorScheme.background,
-                            foregroundColor: colorScheme.primary,
-                            textStyle: QTextStyles.signInButton,
-                            disabledBackgroundColor: colorScheme.secondary,
-                            elevation: 5,
-                          ),
-                          child: checkUpdateController.isLoading.value
-                              ? SizedBox(
-                            width: AutoSize.getAutoHeight(30),
-                            height: AutoSize.getAutoHeight(30),
-                            child: CircularProgressIndicator(
-                              color: colorScheme.background,
-                              strokeWidth: AutoSize.getAutoHeight(4),
-                            ),
+                    child: Hero(
+                      tag: "Button",
+                      child: CsButton(
+                        colorScheme: colorScheme,
+                        text: CSStrings.signIn,
+                        backgroundColor: colorScheme.background,
+                        foregroundColor: colorScheme.primary,
+                        onClick: () => {
+                          Navigator.pushNamed(
+                            context,
+                            SignIn.route,
                           )
-                              : const AutoSizeText(
-                            minFontSize: 2,
-                            QStrings.signIn,
-                          ),
-                        ),
+                        },
                       ),
                     ),
                   ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class QColors {
-  QColors._();
+class CSColors {
+  CSColors._();
 
   static const Color lightest = Color(0xFFFFF0E8);
   static const Color lighter = Color(0xFFFFE8D8);
