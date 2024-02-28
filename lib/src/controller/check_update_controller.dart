@@ -6,16 +6,13 @@ class CheckUpdateController extends GetxController {
   static CheckUpdateController get find => Get.find();
 
   FirebaseRemoteConfig? remoteConfig;
-  final snackBar = const SnackBar(
-    content: Text('Please Update Application!'),
-  );
   RxBool animating = false.obs;
   RxBool animated = false.obs;
   RxBool updated = false.obs;
   RxBool downloadUpdate = false.obs;
   RxBool isLoading = false.obs;
 
-  Future setupRemoteConfig() async {
+  Future setupRemoteConfig(context) async {
     remoteConfig = FirebaseRemoteConfig.instance;
     await remoteConfig?.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(minutes: 1),
@@ -25,7 +22,11 @@ class CheckUpdateController extends GetxController {
     try {
       await remoteConfig?.fetchAndActivate();
     } catch (e) {
-      print('Error fetching remote config: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error fetching'),
+        ),
+      );
     }
   }
 
@@ -35,13 +36,16 @@ class CheckUpdateController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 1000));
     animated.value = true;
     await Future.delayed(const Duration(milliseconds: 1000));
-    setupRemoteConfig();
+    setupRemoteConfig(context);
     String? latestVersion = remoteConfig?.getString("latest_version");
     if (latestVersion == "1.0.0") {
       updated.value = true;
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      updated.value = true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please Update Application!'),
+        ),
+      );
     }
   }
 }
