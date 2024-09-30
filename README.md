@@ -21,7 +21,7 @@ The purpose of the College Space is to revolutionize and elevate the academic ex
 
 ## Features
 
-![Features Showing Image](image.png)
+![Features Showing Image](images/Features.png)
 
 ## Technologies Using
 
@@ -45,15 +45,15 @@ Figma is a collaborative web application for interface design, with additional o
 
 ### Check Update Screen/Splash Screen
 
-![Splash Screen Screenshot](image-4.png)
+![Splash Screen Screenshot](images/Splash-Screen.png)
 
 ### Login Screen
 
-![Login Screen Screenshot](image-5.png)
+![Login Screen Screenshot](images/Login-Screen.png)
 
 ### Registration Screen
 
-![Registration Screen Screenshot 1](image-7.png)
-![Registration Screen Screenshot 2](image-6.png)
+![Registration Screen Screenshot 1](images/image-7.png)
+![Registration Screen Screenshot 2](images/image-6.png)
 
 **Note-** Connecting to Firebase is also done.
