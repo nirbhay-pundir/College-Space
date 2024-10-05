@@ -4,7 +4,7 @@ class CSColors {
   CSColors._();
 
   static const Color lightest = Color(0xFFFFF0E8);
-  static const Color lighter = Color(0xFFFFE8D8);
+  // static const Color lighter = Color(0xFFFFE8D8);
   static const Color light = Color(0xFFDCBFA9);
   static const Color light1 = Color.fromRGBO(220, 191, 169, 0.5);
   static const Color dark = Color(0xFFFF9950);

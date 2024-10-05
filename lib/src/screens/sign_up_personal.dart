@@ -135,7 +135,7 @@ class SignUpPersonal extends StatelessWidget {
                         colorScheme: colorScheme,
                         text: CSStrings.nextButton,
                         backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.background,
+                        foregroundColor: colorScheme.surface,
                         onClick: () => {
                           Navigator.pushNamed(
                             context,
@@ -172,7 +172,7 @@ class SignUpPersonal extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       size: AutoSize.getAutoHeight(30),
                     ),
                   ),

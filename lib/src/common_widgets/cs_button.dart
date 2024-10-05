@@ -52,7 +52,7 @@ class CsButton extends StatelessWidget {
                     width: AutoSize.getAutoHeight(30),
                     height: AutoSize.getAutoHeight(30),
                     child: CircularProgressIndicator(
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       strokeWidth: AutoSize.getAutoHeight(4),
                     ),
                   )

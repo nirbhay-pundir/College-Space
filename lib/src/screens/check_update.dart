@@ -116,7 +116,7 @@ class CheckUpdate extends StatelessWidget {
                               ),
                               child: CsRegisterSignUpText(
                                 colorScheme: colorScheme,
-                                color: colorScheme.background,
+                                color: colorScheme.surface,
                                 onTap: () =>
                                 {
                                   Navigator.pushNamed(
@@ -158,7 +158,7 @@ class CheckUpdate extends StatelessWidget {
                           child: CsButton(
                             colorScheme: colorScheme,
                             text: CSStrings.signIn,
-                            backgroundColor: colorScheme.background,
+                            backgroundColor: colorScheme.surface,
                             foregroundColor: colorScheme.primary,
                             onClick: () =>
                             {

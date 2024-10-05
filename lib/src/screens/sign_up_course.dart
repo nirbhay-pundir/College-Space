@@ -132,7 +132,7 @@ class SignUpCourse extends StatelessWidget {
                           colorScheme: colorScheme,
                           text: CSStrings.register,
                           backgroundColor: colorScheme.primary,
-                          foregroundColor: colorScheme.background,
+                          foregroundColor: colorScheme.surface,
                           onClick: () => {},
                         ),
                       ),
@@ -162,7 +162,7 @@ class SignUpCourse extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       size: AutoSize.getAutoHeight(30),
                     ),
                   ),

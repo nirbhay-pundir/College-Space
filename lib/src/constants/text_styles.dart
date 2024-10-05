@@ -7,7 +7,7 @@ class CSTextStyles {
   static final ColorScheme colorScheme = AppTheme.theme.colorScheme;
 
   static TextStyle bottomLine = TextStyle(
-    color: colorScheme.background,
+    color: colorScheme.surface,
     fontSize: 18,
     fontFamily: 'Blinker',
     fontWeight: FontWeight.w400,

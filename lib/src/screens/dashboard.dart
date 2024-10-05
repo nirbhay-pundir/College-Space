@@ -101,7 +101,7 @@ class Dashboard extends StatelessWidget {
                           colorScheme: colorScheme,
                           text: CSStrings.signOut,
                           backgroundColor: colorScheme.primary,
-                          foregroundColor: colorScheme.background,
+                          foregroundColor: colorScheme.surface,
                           onClick: () => {
                             FirebaseAuth.instance.signOut(),
                           },

@@ -124,9 +124,9 @@ class SignIn extends StatelessWidget {
                                 colorScheme: colorScheme,
                                 text: CSStrings.signIn,
                                 backgroundColor: colorScheme.primary,
-                                foregroundColor: colorScheme.background,
+                                foregroundColor: colorScheme.surface,
                                 onClick: () => {
-                                  FirebaseAuthServices.SignIn(
+                                  FirebaseAuthServices.signIn(
                                     emailController.text.trim(),
                                     passwordController.text.trim(),
                                   ),
@@ -161,7 +161,7 @@ class SignIn extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.arrow_back,
-                            color: colorScheme.background,
+                            color: colorScheme.surface,
                             size: AutoSize.getAutoHeight(30),
                           ),
                         ),
